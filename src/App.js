@@ -78,7 +78,7 @@ function App() {
         </div>
       </nav>
       <Routes>
-        <Route path="/movie2/" element={<Home></Home>}></Route>
+        <Route path="/" element={<Home></Home>}></Route>
         <Route path="/movies" element={<Movies></Movies>}></Route>
         <Route path="/people" element={<People></People>}></Route>
         <Route path="/movie" element={<Movie></Movie>}></Route>
