@@ -6,7 +6,7 @@ const MovieCard = ({movie}) => {
     const { id, title, name, release_date, vote_average, poster_path, first_air_date} = movie
     return ( 
         <div className='mx-2'>
-        <Link to={`/movie`} state={{ id }}>
+        <Link to='/movie2/movie' state={{ id }}>
             <Card sx={{
                 width: 180,
                 minHeight: 250,

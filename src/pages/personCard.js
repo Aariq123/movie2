@@ -7,7 +7,7 @@ const PersonCard = ({item}) => {
     
         return (
             <div className="mr-2 mb-2">
-                <Link to='/person' state={{id}}>
+                <Link to='/movie2/person' state={{id}}>
                 <Card sx={{
                     width: 180,
                     minHeight: 250,

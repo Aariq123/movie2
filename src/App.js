@@ -59,7 +59,7 @@ function App() {
       <div ref={ref} className={`gay md:left-0 absolute top-14 bg-neutral-800 flex flex-col ${menuOpen ? '' : 'hidden'} z-30`}>
         {submenu.map(item=>{
           return (
-            <Link state={{menuName, item:item}} className="gay pr-10 py-4 pr-20 pl-4 hover:bg-white hover:text-black"  key={item} to='movies'>{item}</Link>
+            <Link state={{menuName, item:item}} className="gay pr-10 py-4 pr-20 pl-4 hover:bg-white hover:text-black"  key={item} to='/movie2/movies'>{item}</Link>
           )
         })}
       </div>
@@ -74,17 +74,17 @@ function App() {
         <div className={`flex bg-neutral-800 flex-col ${mobileMenu ? 'left-0' : 'right-full'} absolute top-0 md:bg-transparent md:static text-lg font-bold w-1/2 md:flex-row justify-between`}>
           <p className="gay border-1 md:border-0 border-black py-4 px-2 md:p-0 cursor-pointer" onPointerOver={(e)=>openMenu(e.target.offsetLeft, 'movie')}>Movies</p>
           <p className="gay border-1 md:border-0 border-black my-2 md:m-0 py-4 px-2 md:p-0 cursor-pointer" onPointerOver={(e)=>openMenu(e.target.offsetLeft, 'tv')}>TV-shows</p>
-          <Link className="gay py-4 px-2 md:p-0" to='/people'>People</Link>
+          <Link className="gay py-4 px-2 md:p-0" to='/movie2/people'>People</Link>
         </div>
       </nav>
       <Routes>
         <Route path="/movie2" element={<Home></Home>}></Route>
-        <Route path="/movies" element={<Movies></Movies>}></Route>
-        <Route path="/people" element={<People></People>}></Route>
-        <Route path="/movie" element={<Movie></Movie>}></Route>
-        <Route path="/searchresults" element={<SearchResults></SearchResults>}></Route>
-        <Route path="/person" element={<Person></Person>}></Route>
-        <Route path="/allreviews" element={<AllReviews></AllReviews>}></Route>
+        <Route path="/movie2/movies" element={<Movies></Movies>}></Route>
+        <Route path="/movie2/people" element={<People></People>}></Route>
+        <Route path="/movie2/movie" element={<Movie></Movie>}></Route>
+        <Route path="/movie2/searchresults" element={<SearchResults></SearchResults>}></Route>
+        <Route path="/movie2/person" element={<Person></Person>}></Route>
+        <Route path="/movie2/allreviews" element={<AllReviews></AllReviews>}></Route>
       </Routes>
 
       <footer className="mt-8 bg-black px-10 py-20 flex justify-evenly">
