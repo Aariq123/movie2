@@ -126,14 +126,18 @@ const Home = () => {
         }
     }
 
-    //  useEffect(() => {
+    
     setTimeout(() => design1(), 3000)
-    // }, [leftDiv])
+
 
     return (
         <div onClick={(e) => OpenSearchDiv(e.target)}>
-            <div className='h-90vh md:h-screen text-white flex flex-col justify-center items-center shadow-inner2'>
-                <img className='absolute top-0 bg-image opacity-40 h-90vh md:h-full w-full' src={require('../resource/l.jpg')} alt="" />
+            <div className='h-90vh md:h-screen text-white home flex flex-col justify-center relative items-center shadow-inner2'>
+                
+                    <img className='bg-image opacity-40' src={require('../resource/l.jpg')} alt="" />
+               
+
+               
                 <div className='z-10 text-center flex flex-col items-center'>
                     <p className='text-3xl px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>The biggest database for movies and tv shows</p>
                     <p className='text-lg px-4 sm:p-0 sm:text-2xl my-8'>Search through our database</p>
@@ -182,7 +186,7 @@ const Home = () => {
             </div>
 
 
-            <div className="trend mx-6 md:mx-10">
+            <div className="trend mx-4 md:mx-10">
                 <p className='text-2xl text-left mb-6 sm:mb-8'>Trending now <EastIcon></EastIcon></p>
                 <div className='m-2 mb-4'>{
                     <ToggleButtonGroup exclusive onChange={handleChange} sx={{backgroundColor:'rgb(38, 38, 38)',border:1, borderRadius:20}} size="small" aria-label="Small sizes">
@@ -202,7 +206,7 @@ const Home = () => {
 
 
 
-            <div className="popular mx-6 md:mx-10 sm:mx-20 mt-16">
+            <div className="popular mx-4 md:mx-10 sm:mx-20 mt-16">
                 <p className='text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
                 <div className='py-2 flex overflow-x-scroll'>
                     {popular.length > 0 && popular.map(movie => {

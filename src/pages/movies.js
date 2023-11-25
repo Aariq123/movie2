@@ -34,10 +34,10 @@ const Movies = () => {
         }
     }, [menuName, item]) 
 
-    console.log(list)
+   
 
     return (
-        <div className="p-10 sm:p-20">
+        <div className="py-10 px-4 sm:p-10 sm:p-20">
          <p className="text-center font-bold text-2xl m-6">{item} in {menuName}</p>
         <div className="flex flex-wrap justify-evenly">{list ? list.map(movie => {
             

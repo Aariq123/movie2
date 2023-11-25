@@ -54,3 +54,13 @@ body{
   transition: all .7s ease;
   z-index: -1;
 }
+
+
+
+.bg-image{
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -14,9 +14,9 @@ const People = () => {
             .then(response => response.json())
             .then(response => setPeople(response.results))
     }, [])
-    console.log(people)
+ 
     return (
-        <div className="p-10 sm:p-20">
+        <div className="px-4 py-10 sm:p-10 sm:p-20">
             <p className="text-center font-bold text-2xl m-6">Popular people in BALLS.COM</p>
             <div className="flex flex-wrap justify-evenly">{people ? people.map(movie => {
                 const { profile_path, name, id } = movie

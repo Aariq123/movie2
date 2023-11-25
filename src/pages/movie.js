@@ -61,7 +61,7 @@ const Movie = () => {
                         </div>
                     </div>
 
-                    <div className="md:flex justify-between items-center p-8">
+                    <div className="md:flex justify-between items-center p-4 sm:p-8">
                         <div className="md:w-9/12">
                             <p className="text-lg my-4">Top billed cast</p>
                             <div className="overflow-x-scroll flex">
@@ -87,7 +87,7 @@ const Movie = () => {
                         </div>
                     </div>
 
-                    <div className="mx-10 my-10">
+                    <div className="mx-4 sm:mx-10 my-10">
                         <p className="text-2xl my-4">Reviews</p>
                         {reviews.length > 0 && 
                         <div>
@@ -113,7 +113,7 @@ const Movie = () => {
 }
                     </div>
 
-                    <div className="mx-10 my-6 m-auto">
+                    <div className="mx-4 sm:mx-10 my-6 m-auto">
                         <p className="text-2xl my-4">More like this:</p>
                         <div className="flex overflow-x-scroll">
                             {recommendations && recommendations.map(movie => {

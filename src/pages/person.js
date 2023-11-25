@@ -27,8 +27,7 @@ const Person = () => {
             .then(response => setCredits(response))
     }, [])
 
-    if(credits)
-   console.log(credits.cast)
+  
     return (
         <div>
             {details &&
@@ -68,7 +67,7 @@ const Person = () => {
                         </div>
                     </div>
 
-                    <div className="m-10">
+                    <div className="m-4 sm:m-10">
                         {credits && credits.cast.map(item => {
                             const { character, title, release_date, name, first_air_date, id, vote_average } = item
                             

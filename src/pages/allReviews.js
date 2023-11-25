@@ -7,10 +7,10 @@ import StarIcon from '@mui/icons-material/Star';
 const AllReviews = () => {
     const location = useLocation()
     const [slice, setSlice] = useState(false)
-    console.log(location.state)
+    
 
     return ( 
-        <div className="pt-24 px-10">
+        <div className="pt-24 px-4 sm:px-10">
             {location.state && location.state.map(review=>{
             const { author_details, content, created_at, id} = review
             return (
