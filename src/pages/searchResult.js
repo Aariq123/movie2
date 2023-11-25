@@ -12,7 +12,7 @@ const SearchResults = () => {
            const { poster_path, name, id, title } = movie
            return (
                <div className='m-2' key={id}>
-                   <Link to='/movie2/movie' state={{ id }}>
+                   <Link to='/movie' state={{ id }}>
                        <Card sx={{
                            width: 180,
                            minHeight: 250,

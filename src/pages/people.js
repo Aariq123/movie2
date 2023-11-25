@@ -22,7 +22,7 @@ const People = () => {
                 const { profile_path, name, id } = movie
                 return (
                     <div className='m-2' key={id}>
-                        <Link to='/movie2/person' state={{ id }}>
+                        <Link to='/person' state={{ id }}>
                             <Card sx={{
                                 width: 180,
                                 minHeight: 250,

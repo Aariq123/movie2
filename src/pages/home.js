@@ -146,7 +146,7 @@ const Home = () => {
                                         const { id, poster_path, name, vote_average } = item
                                         return (
                                             <div key={id} className='hover:bg-sky-700 search cursor-pointer'>
-                                                <Link to='/movie2/movie' state={id}>
+                                                <Link to='/movie' state={id}>
                                                 <Card sx={{ display: 'flex', height: 100 }}>
                                                     <CardMedia sx={{ width: 70 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
                                                     <div className='ml-2 text-left'>
@@ -159,7 +159,7 @@ const Home = () => {
                                         )
                                     })
                                 }
-                                <div><Link to='movie2/searchresults' state={{ list: searchArrFull, search }} className='text-lg underline'>See all results</Link></div>
+                                <div><Link to='/searchresults' state={{ list: searchArrFull, search }} className='text-lg underline'>See all results</Link></div>
                             </div>
                         </div>
                     </div>

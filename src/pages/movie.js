@@ -108,7 +108,7 @@ const Movie = () => {
                                 <Button variant="text" onClick={() => setSlice(true)}>Read More</Button>
                             </Card>
                         </div>
-                        <div className="my-4"><Link to='/movie2/allreviews' state={reviews}><p className="underline">Read all reviews</p></Link></div>
+                        <div className="my-4"><Link to='/allreviews' state={reviews}><p className="underline">Read all reviews</p></Link></div>
                         </div>
 }
                     </div>

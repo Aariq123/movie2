@@ -74,7 +74,7 @@ const Person = () => {
                             
                             return (
                                 <div className="m-4" >
-                                    <Link to='/movie2/movie' state={{id}}>
+                                    <Link to='/movie' state={{id}}>
                                     <Card sx={{
                                         backgroundColor: 'transparent',
                                         borderRadius: 2,
