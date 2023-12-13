@@ -36,6 +36,8 @@ body{
 }
 
 
+
+
 .current{
   top: 0;
   transition: all .7s ease;
@@ -57,10 +59,63 @@ body{
 
 
 
-.bg-image{
-  position: absolute;
-  z-index: 1;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+.bg-img{
+  height: 1000px;
+  width: 1800px;
+
 }
+
+
+.bg-current{
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 1s ease;
+  z-index: 1;
+  display: block;
+}
+
+.bg-prev{
+  left:-100%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: all 1s ease;
+  display: block;
+}
+
+.bg-next{
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 1s ease;
+  z-index: 1;
+  display: block;
+}
+
+
+@media (max-width:900px) {
+  .bg-img{
+    height: 800px;
+    width: 1700px;
+  }
+  
+}
+
+
+@media (max-width:800px) {
+  .bg-img{
+    height: 700px;
+    width: 1000px;
+  }
+  
+}
+
+
+@media (max-width:650px) {
+  .bg-img{
+    height: 600px;
+  }
+  
+}
+

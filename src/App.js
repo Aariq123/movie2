@@ -10,6 +10,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CancelIcon from '@mui/icons-material/Cancel';
 import People from "./pages/people";
 import AllReviews from "./pages/allReviews";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Account from "./pages/account";
 
 function App() {
   const { menuOpen, closeMenu, openMenu, position, menuName } = useContext(MainContext)
@@ -74,17 +76,19 @@ function App() {
         <div className={`flex bg-neutral-800 flex-col ${mobileMenu ? 'left-0' : 'right-full'} absolute top-0 md:bg-transparent md:static text-lg font-bold w-1/2 md:flex-row justify-between`}>
           <p className="gay border-1 md:border-0 border-black py-4 px-2 md:p-0 cursor-pointer" onPointerOver={(e)=>openMenu(e.target.offsetLeft, 'movie')}>Movies</p>
           <p className="gay border-1 md:border-0 border-black my-2 md:m-0 py-4 px-2 md:p-0 cursor-pointer" onPointerOver={(e)=>openMenu(e.target.offsetLeft, 'tv')}>TV-shows</p>
-          <Link className="gay py-4 px-2 md:p-0" to='/people'>People</Link>
+          <Link className="py-4 px-2 md:p-0" to='/people'>People</Link>
+          <Link className="py-4 px-2 md:p-0" to='/account'><AccountCircleIcon></AccountCircleIcon></Link>
         </div>
       </nav>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/movies" element={<Movies></Movies>}></Route>
         <Route path="/people" element={<People></People>}></Route>
-        <Route path="/movie" element={<Movie></Movie>}></Route>
+        <Route path="/movie/:id" element={<Movie></Movie>}></Route>
         <Route path="/searchresults" element={<SearchResults></SearchResults>}></Route>
         <Route path="/person" element={<Person></Person>}></Route>
         <Route path="/allreviews" element={<AllReviews></AllReviews>}></Route>
+        <Route path="/account" element={<Account></Account>}></Route>
       </Routes>
 
       <footer className="mt-8 bg-black px-10 py-20 flex justify-evenly">

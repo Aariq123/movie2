@@ -11,36 +11,38 @@ import MovieCard from './movieCard';
 const Home = () => {
     const { options } = useContext(MainContext)
     const [trending, setTrending] = useState([])
-    const [trendingTime, setTrendingTime] = useState('day')
     const [popular, setPopular] = useState([])
     const [leftDiv, setLeftDiv] = useState(1)
     const [rightDiv, setRightDiv] = useState(1)
+    const [bgImg, setBgImg] = useState(0)
     const [search, setSearch] = useState('')
     const [openSearch, setOpenSearch] = useState(false)
     const [searchArrFull, setSearchArrFull] = useState([])
     const [searchArr, setSearchArr] = useState()
     const leftRef = useRef(null)
     const rightRef = useRef(null)
-
+    const bgRef = useRef(null)
+    const deviceRef = useRef(null)
+    const [ displayWidth, setDisplayWidth] = useState('')
 
     const children = [
-        <ToggleButton sx={{color:'white', borderRight:1}} value="week" key='this week'> 
-          This Week
+        <ToggleButton sx={{ color: 'white', borderRight: 1 }} value="week" key='this week'>
+            This Week
         </ToggleButton>,
-        <ToggleButton sx={{color:'white'}} value="day" key='today'>
+        <ToggleButton sx={{ color: 'white' }} value="day" key='today'>
             Today
         </ToggleButton>,
     ];
 
     const handleChange = (e, ghe) => {
         fetch(`https://api.themoviedb.org/3/trending/movie/${ghe}?language=en-US`, options)
-        .then(response => response.json())
-        .then(response => setTrending(response.results))
+            .then(response => response.json())
+            .then(response => setTrending(response.results))
     };
 
 
 
-  
+
     useEffect(() => {
         fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
             .then(response => response.json())
@@ -62,7 +64,7 @@ const Home = () => {
     }, [search])
 
 
-  
+
     const design1 = () => {
         if (leftRef.current) {
             leftRef.current.childNodes.forEach(item => item.className = 'text-lg sm:text-3xl flex flex-col justify-center items-center h-full text-center absolute')
@@ -126,18 +128,64 @@ const Home = () => {
         }
     }
 
-    
+    const bgImgFunc = () => {
+        if (bgRef.current) {
+            bgRef.current.childNodes.forEach(item => item.className = 'bg-img shadow-inner2 absolute hidden opacity-40')
+            if (bgImg == 0) {
+                bgRef.current.children[bgImg].classList.add('bg-current')
+                bgRef.current.children[bgImg + 1].classList.add('bg-next')
+                bgRef.current.children[3].classList.add('bg-prev')
+            } else if (bgImg == 1) {
+                bgRef.current.children[bgImg].classList.add('bg-current')
+                bgRef.current.children[bgImg + 1].classList.add('bg-next')
+                bgRef.current.children[0].classList.add('bg-prev')
+            } else if (bgImg == 3) {
+                bgRef.current.children[bgImg].classList.add('bg-current')
+                bgRef.current.children[0].classList.add('bg-next')
+                bgRef.current.children[bgImg - 1].classList.add('bg-prev')
+            } else {
+                bgRef.current.children[bgImg].classList.add('bg-current')
+                bgRef.current.children[bgImg + 1].classList.add('bg-next')
+                bgRef.current.children[bgImg - 1].classList.add('bg-prev')
+            }
+            setBgImg(bgImg - 1)
+            if (bgImg <= 0) {
+                setBgImg(3)
+            }
+        }
+    }
+
+
     setTimeout(() => design1(), 3000)
+    setTimeout(() => bgImgFunc(), 4000)
+
+
+    useEffect(() => {  
+            setDisplayWidth(deviceRef.current.clientWidth)
+            bgRef.current.childNodes.forEach((item, i) => {
+                if (deviceRef.current.clientWidth < 1000 && deviceRef.current.clientWidth > 580) {
+                    item.src = require(`../resource/${i+1}${i+1}.jpg`)
+                }else if (deviceRef.current.clientWidth < 580 && deviceRef.current.clientWidth > 420) {
+                    item.src = require(`../resource/${i+1}${i+1}${i+1}.jpg`)
+                }else  if (deviceRef.current.clientWidth < 420) {
+                    item.src = require(`../resource/${i+1}${i+1}${i+1}${i+1}.jpg`)
+                }
+            })
+        }, [deviceRef.current, bgRef, displayWidth])
 
 
     return (
-        <div onClick={(e) => OpenSearchDiv(e.target)}>
-            <div className='h-90vh md:h-screen text-white home flex flex-col justify-center relative items-center shadow-inner2'>
-                
-                    <img className='bg-image opacity-40' src={require('../resource/l.jpg')} alt="" />
-               
+        <div onClick={(e) => OpenSearchDiv(e.target)} ref={deviceRef}>
+            <div className='h-90vh md:h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
 
-               
+                <div ref={bgRef} className='absolute h-full flex w-full overflow-hidden'>
+                    <img className='bg-img opacity-40 bg-prev absolute' src={require('../resource/1.jpg')} alt="" />
+                    <img className='bg-img opacity-40 bg-current absolute' src={require('../resource/2.jpg')} alt="" />
+                    <img className='bg-img opacity-40 bg-next absolute' src={require('../resource/3.jpg')} alt="" />
+                    <img className='bg-img opacity-40 hidden absolute' src={require('../resource/4.jpg')} alt="" />
+                </div>
+
+
                 <div className='z-10 text-center flex flex-col items-center'>
                     <p className='text-3xl px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>The biggest database for movies and tv shows</p>
                     <p className='text-lg px-4 sm:p-0 sm:text-2xl my-8'>Search through our database</p>
@@ -147,17 +195,17 @@ const Home = () => {
                             <div>
                                 {
                                     searchArr && searchArr.map(item => {
-                                        const { id, poster_path, name, vote_average } = item
+                                        const { id, poster_path, name, vote_average, media_type, title } = item
                                         return (
                                             <div key={id} className='hover:bg-sky-700 search cursor-pointer'>
-                                                <Link to='/movie' state={id}>
-                                                <Card sx={{ display: 'flex', height: 100 }}>
-                                                    <CardMedia sx={{ width: 70 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
-                                                    <div className='ml-2 text-left'>
-                                                        <p className='my-2'>{name}</p>
-                                                        <p className='text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average}</p>
-                                                    </div>
-                                                </Card>
+                                                <Link to={`/movie/${id}`} state={{ id, media_type }}>
+                                                    <Card sx={{ display: 'flex', height: 100 }}>
+                                                        <CardMedia sx={{ width: 70 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
+                                                        <div className='ml-2 text-left'>
+                                                            <p className='my-2'>{name ? name : title}</p>
+                                                            <p className='text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average}</p>
+                                                        </div>
+                                                    </Card>
                                                 </Link>
                                             </div>
                                         )
@@ -189,14 +237,14 @@ const Home = () => {
             <div className="trend mx-4 md:mx-10">
                 <p className='text-2xl text-left mb-6 sm:mb-8'>Trending now <EastIcon></EastIcon></p>
                 <div className='m-2 mb-4'>{
-                    <ToggleButtonGroup exclusive onChange={handleChange} sx={{backgroundColor:'rgb(38, 38, 38)',border:1, borderRadius:20}} size="small" aria-label="Small sizes">
+                    <ToggleButtonGroup exclusive onChange={handleChange} sx={{ backgroundColor: 'rgb(38, 38, 38)', border: 1, borderRadius: 20 }} size="small" aria-label="Small sizes">
                         {children}
                     </ToggleButtonGroup>
                 }</div>
                 <div className='py-2 flex overflow-x-scroll'>
-                    { trending.length > 0 && trending.map(movie => {
+                    {trending.length > 0 && trending.map(movie => {
                         return (
-                           <MovieCard movie={movie} key={movie.id}></MovieCard>
+                            <MovieCard movie={movie} key={movie.id}></MovieCard>
                         )
                     })
 
@@ -206,15 +254,14 @@ const Home = () => {
 
 
 
-            <div className="popular mx-4 md:mx-10 sm:mx-20 mt-16">
+            <div className="popular mx-4 md:mx-10 mt-16">
                 <p className='text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
                 <div className='py-2 flex overflow-x-scroll'>
                     {popular.length > 0 && popular.map(movie => {
                         return (
-                            <MovieCard movie={movie} key={movie.id}></MovieCard>
+                            <MovieCard movie={movie} mediaType='movie' key={movie.id}></MovieCard>
                         )
                     })
-
                     }
                 </div>
             </div>

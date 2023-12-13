@@ -2,11 +2,11 @@ import { Card, CardMedia } from '@mui/material';
 import { Link } from "react-router-dom";
 import StarIcon from '@mui/icons-material/Star';
 
-const MovieCard = ({movie}) => {
-    const { id, title, name, release_date, vote_average, poster_path, first_air_date} = movie
+const MovieCard = ({movie, mediaType}) => {
+    const { id, title, name, release_date, vote_average, poster_path, first_air_date, media_type } = movie
     return ( 
         <div className='mx-2'>
-        <Link to='/movie' state={{ id }}>
+        <Link to={`/movie/${id}`}state={{ id, media_type: mediaType? mediaType : media_type }}>
             <Card sx={{
                 width: 180,
                 minHeight: 250,

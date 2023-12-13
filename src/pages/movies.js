@@ -35,6 +35,7 @@ const Movies = () => {
     }, [menuName, item]) 
 
    
+    
 
     return (
         <div className="py-10 px-4 sm:p-10 sm:p-20">
@@ -42,7 +43,7 @@ const Movies = () => {
         <div className="flex flex-wrap justify-evenly">{list ? list.map(movie => {
             
             return (
-                <div className="mb-4" key={movie.id}><MovieCard movie={movie}></MovieCard> </div>
+                <div className="mb-4" key={movie.id}><MovieCard movie={movie} mediaType={menuName}></MovieCard> </div>
             )
         }) : <div className="text-2xl text-center my-10">Sorry, an unknown error occured</div>
 

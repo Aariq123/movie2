@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MainContext } from "../context/context";
 import { Button } from "@mui/material";
-import { Card, CardMedia } from '@mui/material';
+import { Card } from '@mui/material';
 import { Link } from "react-router-dom";
 import StarIcon from '@mui/icons-material/Star';
 
@@ -14,7 +14,7 @@ const Person = () => {
     const [details, setDetails] = useState()
     const [credits, setCredits] = useState()
     const [slice, setSlice] = useState(false)
-
+    const [images, setImages] = useState([])
 
 
     useEffect(() => {
@@ -25,9 +25,14 @@ const Person = () => {
         fetch(`https://api.themoviedb.org/3/person/${id}/combined_credits?language=en-US`, options)
             .then(response => response.json())
             .then(response => setCredits(response))
+
+        fetch(`https://api.themoviedb.org/3/person/${id}/images`, options)
+            .then(response => response.json())
+            .then(response => setImages(response.profiles))
     }, [])
 
-  
+
+   
     return (
         <div>
             {details &&
@@ -67,28 +72,39 @@ const Person = () => {
                         </div>
                     </div>
 
+                    <div className="mx-4 sm:mx-10 my-16">
+                        <div className="flex overflow-x-scroll">
+                            {images && images.map(image => {
+                                return (
+                                    <img  className="max-h-80" src={`https://image.tmdb.org/t/p/w300${image.file_path}`}></img>
+                                )
+                            })}
+                        </div>
+                    </div>
+
+
                     <div className="m-4 sm:m-10">
                         {credits && credits.cast.map(item => {
-                            const { character, title, release_date, name, first_air_date, id, vote_average } = item
-                            
+                            const { character, title, release_date, name, first_air_date, id, vote_average, media_type } = item
+
                             return (
                                 <div className="m-4" >
-                                    <Link to='/movie' state={{id}}>
-                                    <Card sx={{
-                                        backgroundColor: 'transparent',
-                                        borderRadius: 2,
-                                        color: 'white',
-                                        padding:2,
-                                        border:1,
-                                        borderColor:"black"
-                                    }}>
-                                        <p>{title ? title : name}</p>
-                                        <p><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
-                                        <div className="text-slate-400">
-                                            <p> as {character}</p>
-                                            <p>{release_date? release_date : first_air_date}</p>
-                                        </div>
-                                    </Card>
+                                    <Link to='/movie' state={{ id , media_type}}>
+                                        <Card sx={{
+                                            backgroundColor: 'transparent',
+                                            borderRadius: 2,
+                                            color: 'white',
+                                            padding: 2,
+                                            border: 1,
+                                            borderColor: "black"
+                                        }}>
+                                            <p>{title ? title : name}</p>
+                                            <p><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
+                                            <div className="text-slate-400">
+                                                <p> as {character}</p>
+                                                <p>{release_date ? release_date : first_air_date}</p>
+                                            </div>
+                                        </Card>
                                     </Link>
                                 </div>
                             )
