@@ -90,7 +90,7 @@ const Movie = () => {
             {movie &&
                 <div className="pt-20">
                     <div className="relative w-screen overflow-hidden flex flex-col sm:flex-row items-center">
-                        {<img className="absolute backdrop z-0 top-0 right-0 opacity-30" src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt=""></img>
+                        {<img className="absolute backdrop z-0 top-0 right-0 opacity-30" src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt=""></img>
                         }
                         <img className=" scale-75 sm:scale-100 sm:m-16 z-10 rounded-lg" src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
                         <div className="px-4 pb-2 sm:p-0 z-10 sm:mx-6">
@@ -115,7 +115,7 @@ const Movie = () => {
                         </div>
                     </div>
 
-                    <div className="md:flex justify-between items-center p-4 sm:p-8">
+                    <div className="mt-10 md:m-0 md:flex justify-between items-center p-4 sm:p-8">
                         <div className="md:w-9/12">
                             <p className="text-lg my-4">Top billed cast</p>
                             <div className="overflow-x-scroll flex">
@@ -126,7 +126,7 @@ const Movie = () => {
                                 })}
                             </div>
                         </div>
-                        <div className="mt-6 md:m-0">
+                        <div className="mt-16 md:m-0">
                             <p className="text-lg">Status</p>
                             <p className="text-slate-400 mb-2">{movie.status}</p>
 
@@ -196,7 +196,7 @@ const Movie = () => {
                             }
                         </div>
 
-                        <div className="mx-4 sm:mx-10 my-6 m-auto">
+                        <div className="mx-1 sm:mx-10 my-6 m-auto">
                             <p className="text-2xl my-4">More like this:</p>
                             <div className="flex overflow-x-scroll">
                                 {recommendations && recommendations.map(movie => {

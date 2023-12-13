@@ -187,8 +187,8 @@ const Home = () => {
 
 
                 <div className='z-10 text-center flex flex-col items-center'>
-                    <p className='text-3xl px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>The biggest database for movies and tv shows</p>
-                    <p className='text-lg px-4 sm:p-0 sm:text-2xl my-8'>Search through our database</p>
+                    <p className='text-lg px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>The biggest database for movies and tv shows</p>
+                    <p className='text-md px-4 sm:p-0 sm:text-2xl my-8'>Search through our database</p>
                     <div className='bg-white w-3/4 flex rounded-md relative'>
                         <TextField value={search} onClick={clickSearchDivOpen} onChange={(e) => setSearch(e.target.value)} fullWidth variant="outlined" placeholder='eg:me3gan' />
                         <div className={openSearch ? 'top-full absolute w-full bg-neutral-800' : 'hidden'}>
@@ -234,14 +234,14 @@ const Home = () => {
             </div>
 
 
-            <div className="trend mx-4 md:mx-10">
-                <p className='text-2xl text-left mb-6 sm:mb-8'>Trending now <EastIcon></EastIcon></p>
-                <div className='m-2 mb-4'>{
+            <div className="trend mx-1 sm:mx-4 md:mx-10">
+                <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Trending now <EastIcon></EastIcon></p>
+                <div className='mb-0 m-2 sm:mb-4'>{
                     <ToggleButtonGroup exclusive onChange={handleChange} sx={{ backgroundColor: 'rgb(38, 38, 38)', border: 1, borderRadius: 20 }} size="small" aria-label="Small sizes">
                         {children}
                     </ToggleButtonGroup>
                 }</div>
-                <div className='py-2 flex overflow-x-scroll'>
+                <div className='sm:py-2 flex overflow-x-scroll'>
                     {trending.length > 0 && trending.map(movie => {
                         return (
                             <MovieCard movie={movie} key={movie.id}></MovieCard>
@@ -254,9 +254,9 @@ const Home = () => {
 
 
 
-            <div className="popular mx-4 md:mx-10 mt-16">
-                <p className='text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
-                <div className='py-2 flex overflow-x-scroll'>
+            <div className="popular mx-1 sm:mx-4 md:mx-10 mt-20">
+                <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
+                <div className='sm:py-2 flex overflow-x-scroll'>
                     {popular.length > 0 && popular.map(movie => {
                         return (
                             <MovieCard movie={movie} mediaType='movie' key={movie.id}></MovieCard>

@@ -6,7 +6,7 @@ const PersonCard = ({item}) => {
     const { id, name, profile_path, character } = item
     
         return (
-            <div className="mr-2 mb-2">
+            <div className="mr-1 mb-1 sm:mr-2 sm:mb-2 scale-75 sm:scale-100">
                 <Link to='/person' state={{id}}>
                 <Card sx={{
                     width: 180,

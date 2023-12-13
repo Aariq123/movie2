@@ -66,7 +66,7 @@ function App() {
         })}
       </div>
       <nav className="py-4 px-4 sm:py-8 absolute sm:px-12 w-screen flex z-20 justify-between">
-        <p className="text-2xl">
+        <p className="text-sm sm:text-2xl">
           <Link to='/'>BALLS.COM</Link>
         </p>
         <div className="md:hidden">

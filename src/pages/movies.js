@@ -38,12 +38,12 @@ const Movies = () => {
     
 
     return (
-        <div className="py-10 px-4 sm:p-10 sm:p-20">
-         <p className="text-center font-bold text-2xl m-6">{item} in {menuName}</p>
+        <div className="py-10 sm:px-4 sm:p-10 sm:p-20">
+         <p className="text-center font-bold my-10 sm:text-2xl sm:m-6">{item} in {menuName}</p>
         <div className="flex flex-wrap justify-evenly">{list ? list.map(movie => {
             
             return (
-                <div className="mb-4" key={movie.id}><MovieCard movie={movie} mediaType={menuName}></MovieCard> </div>
+                <div className="sm:mb-4" key={movie.id}><MovieCard movie={movie} mediaType={menuName}></MovieCard> </div>
             )
         }) : <div className="text-2xl text-center my-10">Sorry, an unknown error occured</div>
 

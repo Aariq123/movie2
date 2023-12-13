@@ -21,7 +21,7 @@ const People = () => {
             <div className="flex flex-wrap justify-evenly">{people ? people.map(movie => {
                 const { profile_path, name, id } = movie
                 return (
-                    <div className='m-2' key={id}>
+                    <div className='m-2 scale-75 sm:scale-100' key={id}>
                         <Link to='/person' state={{ id }}>
                             <Card sx={{
                                 width: 180,
