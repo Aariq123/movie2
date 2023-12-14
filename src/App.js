@@ -91,7 +91,7 @@ function App() {
         <Route path="/account" element={<Account></Account>}></Route>
       </Routes>
 
-      <footer className="mt-8 bg-black px-10 py-20 flex justify-evenly">
+      <footer className="mt-24 bg-black px-10 py-20 flex justify-evenly">
         <div className="flex flex-col">
           <p className="text-2xl m-2">
             <Link to='/'>BALLS.COM</Link>

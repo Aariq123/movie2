@@ -39,10 +39,10 @@ const Person = () => {
                 <div className="pt-24">
                     <div className="bg-black w-screen overflow-hidden md:flex items-center">
                         <img className="border-2 border-white scale-75 sm:scale-100 m-auto sm:m-16 z-10 rounded-xl" src={`https://image.tmdb.org/t/p/w300${details.profile_path}`}></img>
-                        <div className="z-10 p-6 sm:p-0 sm:mx-6">
+                        <div className="z-10 p-2 sm:p-6 sm:p-0 sm:mx-6">
                             <p className="text-lg sm:text-3xl font-bold">{details.name}</p>
-                            <p className="my-6 text-md sm:text-lg">Biography</p>
-                            <p className="text-sm sm:text-md">{slice ? details.biography : details.biography.split('').slice(0, 300).join('') + '...'}</p>
+                            <p className="my-6 text-base sm:text-lg">Biography</p>
+                            <p className="text-sm sm:text-base">{slice ? details.biography : details.biography.split('').slice(0, 300).join('') + '...'}</p>
                             <Button variant="text" onClick={() => setSlice(true)}>Read More</Button>
                         </div>
                     </div>

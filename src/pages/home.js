@@ -161,22 +161,24 @@ const Home = () => {
 
 
     useEffect(() => {  
+        if(deviceRef.current){
             setDisplayWidth(deviceRef.current.clientWidth)
             bgRef.current.childNodes.forEach((item, i) => {
-                if (deviceRef.current.clientWidth < 1000 && deviceRef.current.clientWidth > 580) {
+                if (deviceRef.current.clientWidth < 1000 && deviceRef.current.clientWidth > 600) {
                     item.src = require(`../resource/${i+1}${i+1}.jpg`)
-                }else if (deviceRef.current.clientWidth < 580 && deviceRef.current.clientWidth > 420) {
+                }else if (deviceRef.current.clientWidth < 600 && deviceRef.current.clientWidth > 450) {
                     item.src = require(`../resource/${i+1}${i+1}${i+1}.jpg`)
-                }else  if (deviceRef.current.clientWidth < 420) {
+                }else if (deviceRef.current.clientWidth < 450) {
                     item.src = require(`../resource/${i+1}${i+1}${i+1}${i+1}.jpg`)
                 }
             })
+        }
         }, [deviceRef.current, bgRef, displayWidth])
 
 
     return (
         <div onClick={(e) => OpenSearchDiv(e.target)} ref={deviceRef}>
-            <div className='h-90vh md:h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
+            <div className='h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
 
                 <div ref={bgRef} className='absolute h-full flex w-full overflow-hidden'>
                     <img className='bg-img opacity-40 bg-prev absolute' src={require('../resource/1.jpg')} alt="" />
@@ -189,8 +191,8 @@ const Home = () => {
                 <div className='z-10 text-center flex flex-col items-center'>
                     <p className='text-lg px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>The biggest database for movies and tv shows</p>
                     <p className='text-md px-4 sm:p-0 sm:text-2xl my-8'>Search through our database</p>
-                    <div className='bg-white w-3/4 flex rounded-md relative'>
-                        <TextField value={search} onClick={clickSearchDivOpen} onChange={(e) => setSearch(e.target.value)} fullWidth variant="outlined" placeholder='eg:me3gan' />
+                    <div className='bg-white w-11/12 sm:w-3/4 flex rounded-md relative'>
+                        <TextField value={search} onClick={clickSearchDivOpen} onChange={(e) => setSearch(e.target.value)} fullWidth variant="outlined" placeholder='eg:oppenheimer' />
                         <div className={openSearch ? 'top-full absolute w-full bg-neutral-800' : 'hidden'}>
                             <div>
                                 {
@@ -254,7 +256,7 @@ const Home = () => {
 
 
 
-            <div className="popular mx-1 sm:mx-4 md:mx-10 mt-20">
+            <div className="popular mx-1 sm:mx-4 md:mx-10 mt-24">
                 <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
                 <div className='sm:py-2 flex overflow-x-scroll'>
                     {popular.length > 0 && popular.map(movie => {

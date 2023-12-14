@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
 import { Button, Card, CardContent, CardMedia, TextField } from '@mui/material';
 import Rating from '@mui/material/Rating';
-
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Account = () => {
     const { options } = useContext(MainContext)
@@ -13,6 +12,8 @@ const Account = () => {
     const [showMovies, setShowMovies] = useState([])
     const [tv, setTv] = useState([])
     const [apiKey, setApiKey] = useState('')
+    const matches = useMediaQuery('(max-width:640px)');
+
 
     const deleteOption = {
         method: 'DELETE',
@@ -114,7 +115,7 @@ const Account = () => {
                         <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
 
                             <Card sx={{
-                                height: 200,
+                                height: matches ? 100 : 200,
                                 borderRadius: 5,
                                 backgroundColor: 'transparent',
                                 color: 'white',
@@ -123,15 +124,15 @@ const Account = () => {
                             }}>
                                 <div className='flex items-center relative'>
                                     <Link to='/movie' state={{ id, media_type: 'movie' }}>
-                                        <CardMedia sx={{ height: 200, width: 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
+                                        <CardMedia sx={{ height: matches ? 100 : 200, width:matches ? 60 : 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
                                     </Link>
                                     <Link to='/movie' state={{ id, media_type: 'movie' }}>
                                         <div className='ml-2'>
-                                            <p className='mb-2'>{name ? name : title}</p>
-                                            <p className='text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
+                                            <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
+                                            <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
 
                                             <div className='mt-2'>
-                                                <p className='mb-2'>Your rating:</p>
+                                                <p className='text-xs sm:text-sm mb-2'>Your rating:</p>
                                                 <Rating sx={{ border: 1, borderColor: 'white', borderRadius: 2 }} name="read-only" precision={0.5} value={rating / 2} readOnly />
                                             </div>
                                         </div>

@@ -1,24 +1,27 @@
 import { Card, CardMedia } from '@mui/material';
 import { Link } from "react-router-dom";
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 const PersonCard = ({item}) => {
   
     const { id, name, profile_path, character } = item
-    
+    const matches = useMediaQuery('(max-width:640px)');
+
         return (
-            <div className="mr-1 mb-1 sm:mr-2 sm:mb-2 scale-75 sm:scale-100">
+            <div className="mr-1 mb-1 sm:mr-2 sm:mb-2">
                 <Link to='/person' state={{id}}>
                 <Card sx={{
-                    width: 180,
-                    minHeight: 250,
+                    width:matches ? 120 : 180 ,
+                    minHeight:  matches ? 180 : 250,
                     backgroundColor: 'transparent',
                     boxShadow: 'none',
 
                 }}>
 
                     <CardMedia sx={{
-                        height: 250,
-                        width: 180,
+                        height: matches ? 180 : 250,
+                        width: matches ? 120 : 180,
                         color: 'white',
                         border: 1,
                         borderColor: 'white',

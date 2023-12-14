@@ -110,8 +110,8 @@ body{
 
 @media (max-width:800px) {
   .bg-img{
-    height: 700px;
-    width: 1000px;
+    height: 800px;
+    width: 1200px;
   }
   
 }
@@ -119,7 +119,7 @@ body{
 
 @media (max-width:650px) {
   .bg-img{
-    height: 600px;
+    height: 800px;
   }
   
 }

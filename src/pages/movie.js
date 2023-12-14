@@ -27,7 +27,6 @@ const Movie = () => {
 
 
 
-
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/${media_type ? media_type + '/' : ''}${id}?append_to_response=reviews,credits,images,recommendations`, options)
             .then(response => response.json())
