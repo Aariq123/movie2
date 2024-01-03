@@ -186,7 +186,7 @@ const Movie = () => {
             {movie &&
                 <div className="pt-20 relative">
                     <div className="relative w-screen overflow-hidden flex flex-col sm:flex-row items-center">
-                        <div className={ratingMessageShow ? 'text-center text-lg px-10 py-6 z-20 bg-neutral-800 rounded-lg absolute top-80 sm:top-28 right-0 transition-all duration-700' : 'px-10 py-6  top-80 sm:top-28 absolute right-[-100%] transition-all duration-700'}>
+                        <div className={ratingMessageShow ? 'text-center text-lg px-10 py-6 z-20 bg-white rounded-lg absolute top-96 sm:top-28 right-0 transition-all duration-700' : 'px-10 py-6  top-96 sm:top-28 absolute right-[-100%] transition-all duration-700'}>
                             <p className={ratingMessage[1]}>{ratingMessage[0]}</p>
                         </div>
                         {<img className="absolute backdrop z-0 top-0 right-0 opacity-30" src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt=""></img>

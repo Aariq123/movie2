@@ -282,26 +282,26 @@ const Account = () => {
                 </div>
 
                 <div className={signin ? 'text-base sm:text-lg text-center my-12' : 'hidden'}>
-                    <p className='flex justify-center items-center'>You can sign up to tmdb here:
-                        <a className='text-teal-400' href='https://www.themoviedb.org/signup'>
+                    <p className='flex flex-col sm:flex-row justify-center items-center'>You can sign up to tmdb here:
+                        <a className='text-teal-400 mt-2 sm:m-0' href='https://www.themoviedb.org/signup'>
                             <img width='120' src='https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg'></img>
                         </a>
                     </p>
                 </div>
 
-                <div className={!form ? 'hidden' : 'border-2  flex flex-col items-center text-center rounded-2xl border-gray-900 shadow-2xl text-white p-10'}>
+                <div className={!form ? 'hidden' : 'border-2  flex flex-col items-center justify-center text-center rounded-2xl border-gray-900 shadow-2xl text-white py-4 px-2.5 sm:p-10'}>
                     <p className='text-center my-6 m-auto text-2xl text-cyan-500'>Login to your account:</p>
                     <form className='mt-6'>
                         <div className='flex flex-wrap items-center'>
                             <label htmlFor="name">Username:</label>
-                            <div className='ml-2 w-full sm:w-96 color-white'>
+                            <div className='m-auto sm:ml-2 w-full sm:w-96'>
                                 <TextField required sx={{ backgroundColor: 'white' }} fullWidth onChange={(e) => setUsername(e.target.value)} variant="outlined" />
                             </div>
 
                         </div>
                         <div className='flex flex-wrap items-center mt-4'>
                             <label htmlFor="pass">Password:</label>
-                            <div className='ml-3 w-full sm:w-96'>
+                            <div className='m-auto sm:ml-2 w-full sm:w-96'>
                                 <TextField required type="password" sx={{ backgroundColor: 'white' }} fullWidth onChange={(e) => setPassword(e.target.value)} variant="outlined" />
                             </div>
                         </div>
@@ -350,8 +350,8 @@ const Account = () => {
                             <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
 
                                 <Card sx={{
-                                    height: matches ? 100 : 200,
-                                    borderRadius: 5,
+                                    height: matches ? 120 : 200,
+                                    borderRadius: matches ? 0 : 5,
                                     backgroundColor: 'transparent',
                                     color: 'white',
                                     border: 1,
@@ -359,9 +359,9 @@ const Account = () => {
                                 }}>
                                     <div className='flex items-center relative'>
                                         <Link to={`/movie/${id}`} state={{ id, media_type: 'movie' }}>
-                                            <CardMedia sx={{ height: matches ? 100 : 200, width: matches ? 60 : 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
+                                            <CardMedia sx={{ height: matches ? 120 : 200, width: matches ? 60 : 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
                                         </Link>
-                                        <Link to='/movie' state={{ id, media_type: 'movie' }}>
+                                        <Link to={`/movie/${id}`} state={{ id, media_type: 'movie' }}>
                                             <div className='ml-2'>
                                                 <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
                                                 <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
@@ -372,7 +372,7 @@ const Account = () => {
                                                 </div>
                                             </div>
                                         </Link>
-                                        <div className='absolute right-4 bottom-2/4 translate-y-2/4'>
+                                        <div className='absolute right-1 sm:right-4 bottom-2/4 translate-y-2/4 z-10'>
                                             <Button onClick={() => deleteRating('movie', id)} variant='contained' color='error'>Delete</Button>
                                         </div>
                                     </div>
@@ -392,19 +392,18 @@ const Account = () => {
                             <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
 
                                 <Card sx={{
-                                         height: matches ? 300 : 200,
-                                         width:matches? 200 : '100%',
-                                         borderRadius: 5,
+                                         height: matches ? 120 : 200,
+                                         borderRadius: matches ? 0 : 5,
                                          backgroundColor: 'transparent',
                                          color: 'white',
                                          border: 1,
                                          borderColor: "black"
                                 }}>
-                                    <div className='flex flex-col sm:flex-row items-center relative'>
+                                    <div className='flex items-center relative'>
                                         <Link to={`/movie/${id}`} state={{ id, media_type: 'tv' }}>
-                                            <CardMedia sx={{height: matches ? 100 : 200, width: matches ? 60 : 130  }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
+                                            <CardMedia sx={{height: matches ? 120 : 200, width: matches ? 60 : 130  }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
                                         </Link>
-                                        <Link to='/movie' state={{ id, media_type: 'tv' }}>
+                                        <Link to={`/movie/${id}`} state={{ id, media_type: 'tv' }}>
                                             <div className='ml-2'>
                                                 <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
                                                 <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
@@ -415,7 +414,7 @@ const Account = () => {
                                                 </div>
                                             </div>
                                         </Link>
-                                        <div className='sm:absolute right-4 bottom-2/4 translate-y-2/4'>
+                                        <div className='absolute right-1 sm:right-4 bottom-2/4 translate-y-2/4 z-10'>
                                             <Button onClick={() => deleteRating('tv', id)} variant='contained' color='error'>Delete</Button>
                                         </div>
                                     </div>

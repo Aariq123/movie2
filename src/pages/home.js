@@ -178,7 +178,7 @@ const Home = () => {
 
     return (
         <div className='mb-40' onClick={(e) => OpenSearchDiv(e.target)} ref={deviceRef}>
-            <div className='h-95vh sm:h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
+            <div className='h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
 
                 <div ref={bgRef} className='absolute h-full flex w-full overflow-hidden'>
                     <img className='bg-img opacity-30 bg-prev absolute' src={require('../resource/1.jpg')} alt="" />
