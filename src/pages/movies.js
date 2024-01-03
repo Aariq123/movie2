@@ -5,7 +5,7 @@ import MovieCard from "./movieCard";
 
 const Movies = () => {
     const location = useLocation()
-    const { options } = useContext(MainContext)
+    const { options, setMobileMenu, setMenuOpen } = useContext(MainContext)
     const [ list, setList ] = useState()
     const { menuName, item } = location.state
 
@@ -20,7 +20,7 @@ const Movies = () => {
             .then(response => response.json())
             .then(response => setList(response.results)) 
         }else if(item == 'On TV'){
-            fetch(`https://api.themoviedb.org/3/${menuName}/on_tv?language=en-US&page=1`, options)
+            fetch(`https://api.themoviedb.org/3/${menuName}/on_the_air?language=en-US&page=1`, options)
             .then(response => response.json())
             .then(response => setList(response.results)) 
         }else if(item == 'Airing today'){
@@ -34,12 +34,17 @@ const Movies = () => {
         }
     }, [menuName, item]) 
 
-   
-    
 
+   
+    useEffect(()=>{
+        setMobileMenu(false)
+        setMenuOpen(false)
+    },[location.state.menuName, location.state.item])
+
+    
     return (
         <div className="py-10 sm:px-4 sm:p-10 sm:p-20">
-         <p className="text-center font-bold my-10 sm:text-2xl sm:m-6">{item} in {menuName}</p>
+         <p className="text-center text-lg font-bold my-10 sm:text-2xl sm:m-6">{item} in {menuName}</p>
         <div className="flex flex-wrap justify-evenly">{list ? list.map(movie => {
             
             return (

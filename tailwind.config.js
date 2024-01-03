@@ -9,7 +9,13 @@ module.exports = {
         'inner2': 'inset 1000px 1000px 1000px 1000px black',
       },
       height: {
-        '90vh': '90vh',
+        '95vh': '95vh',
+      },
+      minHeight: {
+        '100vh': '100vh',
+      },
+      spacing: {
+        'neg': '-100%',
       }
     },
   },

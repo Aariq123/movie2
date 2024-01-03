@@ -38,6 +38,7 @@ const Home = () => {
         fetch(`https://api.themoviedb.org/3/trending/movie/${ghe}?language=en-US`, options)
             .then(response => response.json())
             .then(response => setTrending(response.results))
+        
     };
 
 
@@ -130,7 +131,7 @@ const Home = () => {
 
     const bgImgFunc = () => {
         if (bgRef.current) {
-            bgRef.current.childNodes.forEach(item => item.className = 'bg-img shadow-inner2 absolute hidden opacity-40')
+            bgRef.current.childNodes.forEach(item => item.className = 'bg-img shadow-inner2 absolute hidden opacity-30')
             if (bgImg == 0) {
                 bgRef.current.children[bgImg].classList.add('bg-current')
                 bgRef.current.children[bgImg + 1].classList.add('bg-next')
@@ -155,7 +156,6 @@ const Home = () => {
         }
     }
 
-
     setTimeout(() => design1(), 3000)
     setTimeout(() => bgImgFunc(), 4000)
 
@@ -177,19 +177,19 @@ const Home = () => {
 
 
     return (
-        <div onClick={(e) => OpenSearchDiv(e.target)} ref={deviceRef}>
-            <div className='h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
+        <div className='mb-40' onClick={(e) => OpenSearchDiv(e.target)} ref={deviceRef}>
+            <div className='h-95vh sm:h-screen text-white home flex flex-col relative justify-center items-center shadow-inner2'>
 
                 <div ref={bgRef} className='absolute h-full flex w-full overflow-hidden'>
-                    <img className='bg-img opacity-40 bg-prev absolute' src={require('../resource/1.jpg')} alt="" />
-                    <img className='bg-img opacity-40 bg-current absolute' src={require('../resource/2.jpg')} alt="" />
-                    <img className='bg-img opacity-40 bg-next absolute' src={require('../resource/3.jpg')} alt="" />
-                    <img className='bg-img opacity-40 hidden absolute' src={require('../resource/4.jpg')} alt="" />
+                    <img className='bg-img opacity-30 bg-prev absolute' src={require('../resource/1.jpg')} alt="" />
+                    <img className='bg-img opacity-30 bg-current absolute' src={require('../resource/2.jpg')} alt="" />
+                    <img className='bg-img opacity-30 bg-next absolute' src={require('../resource/3.jpg')} alt="" />
+                    <img className='bg-img opacity-30 hidden absolute' src={require('../resource/4.jpg')} alt="" />
                 </div>
 
 
                 <div className='z-10 text-center flex flex-col items-center'>
-                    <p className='text-lg px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>The biggest database for movies and tv shows</p>
+                    <p className='text-lg px-4 sm:p-0 sm:text-4xl font-bold sm:w-3/4'>THE BIGGEST DATABASE FOR MOVIES & TV SHOWS</p>
                     <p className='text-md px-4 sm:p-0 sm:text-2xl my-8'>Search through our database</p>
                     <div className='bg-white w-11/12 sm:w-3/4 flex rounded-md relative'>
                         <TextField value={search} onClick={clickSearchDivOpen} onChange={(e) => setSearch(e.target.value)} fullWidth variant="outlined" placeholder='eg:oppenheimer' />
@@ -236,10 +236,10 @@ const Home = () => {
             </div>
 
 
-            <div className="trend mx-1 sm:mx-4 md:mx-10">
+            <div className="trend mx-2 sm:mx-4 md:mx-10">
                 <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Trending now <EastIcon></EastIcon></p>
-                <div className='mb-0 m-2 sm:mb-4'>{
-                    <ToggleButtonGroup exclusive onChange={handleChange} sx={{ backgroundColor: 'rgb(38, 38, 38)', border: 1, borderRadius: 20 }} size="small" aria-label="Small sizes">
+                <div className='mb-4'>{
+                    <ToggleButtonGroup exclusive color='success' onChange={handleChange} sx={{ border: 1}} size="small" aria-label="Small sizes">
                         {children}
                     </ToggleButtonGroup>
                 }</div>
@@ -256,7 +256,7 @@ const Home = () => {
 
 
 
-            <div className="popular mx-1 sm:mx-4 md:mx-10 mt-24">
+            <div className="popular mx-2 sm:mx-4 md:mx-10 mt-24">
                 <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
                 <div className='sm:py-2 flex overflow-x-scroll'>
                     {popular.length > 0 && popular.map(movie => {
