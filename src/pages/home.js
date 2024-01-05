@@ -236,7 +236,7 @@ const Home = () => {
             </div>
 
 
-            <div className="trend mx-2 sm:mx-4 md:mx-10">
+            <div className="trend mt-20 mx-2 sm:mx-4 md:mx-10">
                 <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Trending now <EastIcon></EastIcon></p>
                 <div className='mb-4'>{
                     <ToggleButtonGroup exclusive color='success' onChange={handleChange} sx={{ border: 1}} size="small" aria-label="Small sizes">
@@ -256,7 +256,7 @@ const Home = () => {
 
 
 
-            <div className="popular mx-2 sm:mx-4 md:mx-10 mt-24">
+            <div className="popular mx-2 sm:mx-4 md:mx-10 mt-40">
                 <p className='text-lg sm:text-2xl text-left mb-6 sm:mb-8'>Popular <EastIcon></EastIcon></p>
                 <div className='sm:py-2 flex overflow-x-scroll'>
                     {popular.length > 0 && popular.map(movie => {

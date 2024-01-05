@@ -4,8 +4,6 @@ import { useState } from "react";
 export const MainContext = createContext()
 
 export const ContextProvider = ({ children }) => {
-
-
   const [menuOpen, setMenuOpen] = useState(false)
   const [position, setPosition] = useState(0)
   const [menuName, setMenuName] = useState('')
@@ -28,7 +26,6 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
-
   const options = {
     method: 'GET',
     headers: {
@@ -37,16 +34,24 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  const options2 = {
+
+  const postOptions = {
     method: 'POST',
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
     }
-  };
-  
+  }
 
+  const deleteOption = {
+    method: 'DELETE',
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
+    }
+  };
 
   useEffect(() => {
     if (sessionStorage.getItem('user') && userData == undefined) {
@@ -55,27 +60,26 @@ export const ContextProvider = ({ children }) => {
   }, [])
 
 
-
-  
   return (
     <MainContext.Provider
       value={{
         options,
         userData,
-        checkWatchlistMovies, 
-        checkWatchlistTv, 
-        setCheckWatchlistMovies, 
-        setCheckWatchlistTv, 
-        setUserData, 
-        mobileMenu, 
-        setMobileMenu, 
-        setMenuOpen, 
-        options2, 
-        menuOpen, 
-        menuName, 
-        closeMenu, 
-        openMenu, 
-        position, 
+        checkWatchlistMovies,
+        checkWatchlistTv,
+        setCheckWatchlistMovies,
+        setCheckWatchlistTv,
+        setUserData,
+        mobileMenu,
+        setMobileMenu,
+        setMenuOpen,
+        postOptions,
+        deleteOption,
+        menuOpen,
+        menuName,
+        closeMenu,
+        openMenu,
+        position,
         setPosition
       }}>
       {children}

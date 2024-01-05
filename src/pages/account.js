@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { MainContext } from '../context/context';
 import { Link } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
-import { Button, Card, CardContent, CardMedia, TextField } from '@mui/material';
+import { Button, Card, CardMedia, TextField } from '@mui/material';
 import Rating from '@mui/material/Rating';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -10,7 +10,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 
 const Account = () => {
-    const { options, userData, setUserData, setCheckWatchlistMovies, setCheckWatchlistTv } = useContext(MainContext)
+    const { options, postOptions, userData, setUserData, deleteOption, setCheckWatchlistMovies, setCheckWatchlistTv } = useContext(MainContext)
     const [movies, setMovies] = useState([])
     const [ratedMovies, setRatedMovies] = useState([])
     const [watchlistMovies, setWatchlistMovies] = useState([])
@@ -42,39 +42,26 @@ const Account = () => {
 
 
 
-
-
-    const deleteOption = {
-        method: 'DELETE',
-        headers: {
-            accept: 'application/json',
-            'Content-Type': 'application/json;charset=utf-8',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
-        }
-    };
-
-
     useEffect(() => {
         if (showLogout) {
-            if(sessionStorage.getItem('session_id')){
+            if (sessionStorage.getItem('session_id')) {
                 const id = JSON.parse(sessionStorage.getItem('session_id')).session_id
-
 
                 fetch(`https://api.themoviedb.org/3/account/17109799/rated/movies?language=en-US&page=1&session_id=${id}&sort_by=created_at.asc`, options)
                     .then(response => response.json())
                     .then(response => setRatedMovies(response.results))
-    
+
                 fetch(`https://api.themoviedb.org/3/account/17109799/rated/tv?language=en-US&page=1&session_id=${id}&sort_by=created_at.asc`, options)
                     .then(response => response.json())
                     .then(response => setRatedTv(response.results))
-    
+
                 fetch(`https://api.themoviedb.org/3/account/17109799/watchlist/movies?language=en-US&page=1&session_id=${id}&sort_by=created_at.asc`, options)
                     .then(response => response.json())
                     .then(response => {
                         setWatchlistMovies(response.results)
                         setCheckWatchlistMovies(response.results)
                     })
-    
+
                 fetch(`https://api.themoviedb.org/3/account/17109799/watchlist/tv?language=en-US&page=1&session_id=${id}&sort_by=created_at.asc`, options)
                     .then(response => response.json())
                     .then(response => {
@@ -83,7 +70,6 @@ const Account = () => {
                     })
             }
         }
-
     }, [showLogout])
 
 
@@ -91,7 +77,7 @@ const Account = () => {
         if (ratedMovies) {
             setMovies(ratedMovies)
             setTv(ratedTv)
-        }else if(watchlistMovies){
+        } else if (watchlistMovies) {
             setMovies(watchlistMovies)
             setTv(watchlistTv)
         }
@@ -102,16 +88,8 @@ const Account = () => {
         if (sessionStorage.getItem('session_id')) {
             const sessionId = JSON.parse(sessionStorage.getItem('session_id')).session_id
             if (movies == watchlistMovies) {
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        accept: 'application/json',
-                        'content-type': 'application/json',
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
-                    },
-                    body: JSON.stringify({ media_type: type, media_id: id, watchlist: false })
-                };
-                fetch(`https://api.themoviedb.org/3/account/17109799/watchlist?session_id=${sessionId}`, options)
+                postOptions.body = JSON.stringify({ media_type: type, media_id: id, watchlist: false })
+                fetch(`https://api.themoviedb.org/3/account/17109799/watchlist?session_id=${sessionId}`, postOptions)
                     .then(response => response.json())
             } else {
                 fetch(`https://api.themoviedb.org/3/${type}/${id}/rating?session_id=${sessionId}`, deleteOption)
@@ -170,38 +148,20 @@ const Account = () => {
     }
 
     const login = () => {
-        const ligma = {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                request_token: JSON.parse(sessionStorage.getItem('data')).request_token.request_token
-            })
-        };
-
-
-        fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', ligma)
+        postOptions.body =  JSON.stringify({
+            username: username,
+            password: password,
+            request_token: JSON.parse(sessionStorage.getItem('data')).request_token.request_token
+        })
+        
+        fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', postOptions)
             .then(response => response.json())
             .then(response => {
                 if (response.success) {
-                    const sessionOptions = {
-                        method: 'POST',
-                        headers: {
-                            accept: 'application/json',
-                            'content-type': 'application/json',
-                            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
-                        },
-                        body: JSON.stringify({ request_token: JSON.parse(sessionStorage.getItem('data')).request_token.request_token })
-                    }
-
+                    postOptions.body =  JSON.stringify({ request_token: JSON.parse(sessionStorage.getItem('data')).request_token.request_token })
                     sessionStorage.removeItem('data')
 
-                    fetch('https://api.themoviedb.org/3/authentication/session/new', sessionOptions)
+                    fetch('https://api.themoviedb.org/3/authentication/session/new', postOptions)
                         .then(response => response.json())
                         .then(response => {
                             sessionStorage.setItem('session_id', JSON.stringify({
@@ -242,20 +202,11 @@ const Account = () => {
 
 
     const logout = () => {
-        const options = {
-            method: 'DELETE',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZmJiMmNiMzI4ZjAzNmQyZTRjNDhjZTNmYWNmY2FkMSIsInN1YiI6IjYzY2NhMDkyZDM2M2U1MDA3OWMxZDgxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mErSuuOgl3ZJs_FFxu6pCndbNMr3YSlMg986wLn54xg'
-            },
-            body: JSON.stringify({ session_id: JSON.parse(sessionStorage.getItem('session_id')).session_id })
-        };
-
+        deleteOption.body =  JSON.stringify({ session_id: JSON.parse(sessionStorage.getItem('session_id')).session_id })
         sessionStorage.removeItem('session_id')
         sessionStorage.removeItem('user')
 
-        fetch('https://api.themoviedb.org/3/authentication/session', options)
+        fetch('https://api.themoviedb.org/3/authentication/session', deleteOption)
             .then(response => response.json())
 
         setShowLogout(false)
@@ -289,8 +240,8 @@ const Account = () => {
                     </p>
                 </div>
 
-                <div className={!form ? 'hidden' : 'border-2  flex flex-col items-center justify-center text-center rounded-2xl border-gray-900 shadow-2xl text-white py-4 px-2.5 sm:p-10'}>
-                    <p className='text-center my-6 m-auto text-2xl text-cyan-500'>Login to your account:</p>
+                <div className={!form ? 'hidden' : 'border-2  flex flex-col items-center justify-center text-center rounded-2xl border-gray-900 shadow-2xl text-white pt-2 pb-4 px-2.5 sm:p-10'}>
+                    <p className='text-center my-6 m-auto text-lg sm:text-2xl text-cyan-500'>Login to your account:</p>
                     <form className='mt-6'>
                         <div className='flex flex-wrap items-center'>
                             <label htmlFor="name">Username:</label>
@@ -301,7 +252,7 @@ const Account = () => {
                         </div>
                         <div className='flex flex-wrap items-center mt-4'>
                             <label htmlFor="pass">Password:</label>
-                            <div className='m-auto sm:ml-2 w-full sm:w-96'>
+                            <div className='m-auto sm:ml-3 w-full sm:w-96'>
                                 <TextField required type="password" sx={{ backgroundColor: 'white' }} fullWidth onChange={(e) => setPassword(e.target.value)} variant="outlined" />
                             </div>
                         </div>
@@ -328,102 +279,102 @@ const Account = () => {
             </div>
 
             {
-            userData && <div className='w-full'>
-                <div>
-                    <ToggleButtonGroup
-                        value={alignment}
-                        exclusive
-                        onChange={handleChange}
-                        color='error'
-                        sx={{border:1, borderColor:'white'}}
-                    >
-                        <ToggleButton sx={{color:'white', borderRight:1, borderColor:'white', fontSize: matches ? 12 : 16}} value="rated">Rated</ToggleButton>
-                        <ToggleButton sx={{color:'white', fontSize: matches ? 12 : 16}} value="watchlist">Watchlist</ToggleButton>
-                    </ToggleButtonGroup>
-                </div>
+                userData && <div className='w-full'>
+                    <div>
+                        <ToggleButtonGroup
+                            value={alignment}
+                            exclusive
+                            onChange={handleChange}
+                            color='error'
+                            sx={{ border: 1, borderColor: 'white' }}
+                        >
+                            <ToggleButton sx={{ color: 'white', borderRight: 1, borderColor: 'white', fontSize: matches ? 12 : 16 }} value="rated">Rated</ToggleButton>
+                            <ToggleButton sx={{ color: 'white', fontSize: matches ? 12 : 16 }} value="watchlist">Watchlist</ToggleButton>
+                        </ToggleButtonGroup>
+                    </div>
 
-                <div>
-                    <p className='text-center font-bold text-2xl m-6'>{alignment === 'rated' ? 'Your Rated Movies:' : 'Your Movie Watchlist:'} </p>
-                    {movies.length > 0 ? movies.map(item => {
-                        const { id, poster_path, name, vote_average, title, rating } = item
-                        return (
-                            <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
+                    <div>
+                        <p className='text-center font-bold text-2xl m-6'>{alignment === 'rated' ? 'Your Rated Movies:' : 'Your Movie Watchlist:'} </p>
+                        {movies.length > 0 ? movies.map(item => {
+                            const { id, poster_path, name, vote_average, title, rating } = item
+                            return (
+                                <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
 
-                                <Card sx={{
-                                    height: matches ? 120 : 200,
-                                    borderRadius: matches ? 0 : 5,
-                                    backgroundColor: 'transparent',
-                                    color: 'white',
-                                    border: 1,
-                                    borderColor: "black"
-                                }}>
-                                    <div className='flex items-center relative'>
-                                        <Link to={`/movie/${id}`} state={{ id, media_type: 'movie' }}>
-                                            <CardMedia sx={{ height: matches ? 120 : 200, width: matches ? 60 : 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
-                                        </Link>
-                                        <Link to={`/movie/${id}`} state={{ id, media_type: 'movie' }}>
-                                            <div className='ml-2'>
-                                                <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
-                                                <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
+                                    <Card sx={{
+                                        height: matches ? 120 : 200,
+                                        borderRadius: matches ? 0 : 5,
+                                        backgroundColor: 'transparent',
+                                        color: 'white',
+                                        border: 1,
+                                        borderColor: "black"
+                                    }}>
+                                        <div className='flex items-center relative'>
+                                            <Link to={`/movie/${id}`} state={{ id, media_type: 'movie' }}>
+                                                <CardMedia sx={{ height: matches ? 120 : 200, width: matches ? 60 : 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
+                                            </Link>
+                                            <Link to={`/movie/${id}`} state={{ id, media_type: 'movie' }}>
+                                                <div className='ml-2'>
+                                                    <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
+                                                    <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
 
-                                                <div className={alignment == 'rated' ? 'mt-2' : 'hidden'}>
-                                                    <p className='text-xs sm:text-sm mb-2'>Your rating:</p>
-                                                    <Rating sx={{ border: 1, borderColor: 'white', borderRadius: 2 }} name="read-only" precision={0.5} value={rating / 2} readOnly />
+                                                    <div className={alignment == 'rated' ? 'mt-2' : 'hidden'}>
+                                                        <p className='text-xs sm:text-sm mb-2'>Your rating:</p>
+                                                        <Rating sx={{ border: 1, borderColor: 'white', borderRadius: 2 }} name="read-only" precision={0.5} value={rating / 2} readOnly />
+                                                    </div>
                                                 </div>
+                                            </Link>
+                                            <div className='absolute right-1 sm:right-4 bottom-2/4 translate-y-2/4 z-10'>
+                                                <Button onClick={() => deleteRating('movie', id)} variant='contained' color='error'>Delete</Button>
                                             </div>
-                                        </Link>
-                                        <div className='absolute right-1 sm:right-4 bottom-2/4 translate-y-2/4 z-10'>
-                                            <Button onClick={() => deleteRating('movie', id)} variant='contained' color='error'>Delete</Button>
                                         </div>
-                                    </div>
 
-                                </Card>
+                                    </Card>
 
-                            </div>
-                        )
-                    }) : <p className='text-red-600 text-center'>No Movies</p>}
-                </div>
+                                </div>
+                            )
+                        }) : <p className='text-red-600 text-center'>No Movies</p>}
+                    </div>
 
-                <div>
-                    <p className='text-center font-bold text-2xl mt-20 m-6'>{alignment === 'rated' ? 'Your Rated TV-Shows:' : 'Your TV Watchlist:'} </p>
-                    {tv.length > 0 ? tv.map(item => {
-                        const { id, poster_path, name, vote_average, title, rating } = item
-                        return (
-                            <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
+                    <div>
+                        <p className='text-center font-bold text-2xl mt-20 m-6'>{alignment === 'rated' ? 'Your Rated TV-Shows:' : 'Your TV Watchlist:'} </p>
+                        {tv.length > 0 ? tv.map(item => {
+                            const { id, poster_path, name, vote_average, title, rating } = item
+                            return (
+                                <div key={id} className='hover:scale-x-95 my-6 search cursor-pointer'>
 
-                                <Card sx={{
-                                         height: matches ? 120 : 200,
-                                         borderRadius: matches ? 0 : 5,
-                                         backgroundColor: 'transparent',
-                                         color: 'white',
-                                         border: 1,
-                                         borderColor: "black"
-                                }}>
-                                    <div className='flex items-center relative'>
-                                        <Link to={`/movie/${id}`} state={{ id, media_type: 'tv' }}>
-                                            <CardMedia sx={{height: matches ? 120 : 200, width: matches ? 60 : 130  }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
-                                        </Link>
-                                        <Link to={`/movie/${id}`} state={{ id, media_type: 'tv' }}>
-                                            <div className='ml-2'>
-                                                <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
-                                                <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
+                                    <Card sx={{
+                                        height: matches ? 120 : 200,
+                                        borderRadius: matches ? 0 : 5,
+                                        backgroundColor: 'transparent',
+                                        color: 'white',
+                                        border: 1,
+                                        borderColor: "black"
+                                    }}>
+                                        <div className='flex items-center relative'>
+                                            <Link to={`/movie/${id}`} state={{ id, media_type: 'tv' }}>
+                                                <CardMedia sx={{ height: matches ? 120 : 200, width: matches ? 60 : 130 }} image={`https://image.tmdb.org/t/p/w200${poster_path}`}></CardMedia>
+                                            </Link>
+                                            <Link to={`/movie/${id}`} state={{ id, media_type: 'tv' }}>
+                                                <div className='ml-2'>
+                                                    <p className='text-sm sm:text-base mb-2'>{name ? name : title}</p>
+                                                    <p className='text-xs sm:text-lg'><StarIcon sx={{ color: 'gold' }}></StarIcon>{vote_average.toFixed(1)}</p>
 
-                                                <div className={alignment == 'rated' ? 'mt-2' : 'hidden'}>
-                                                    <p className='text-xs sm:text-sm mb-2'>Your rating:</p>
-                                                    <Rating sx={{ border: 1, borderColor: 'white', borderRadius: 2 }} name="read-only" precision={0.5} value={rating / 2} readOnly />
+                                                    <div className={alignment == 'rated' ? 'mt-2' : 'hidden'}>
+                                                        <p className='text-xs sm:text-sm mb-2'>Your rating:</p>
+                                                        <Rating sx={{ border: 1, borderColor: 'white', borderRadius: 2 }} name="read-only" precision={0.5} value={rating / 2} readOnly />
+                                                    </div>
                                                 </div>
+                                            </Link>
+                                            <div className='absolute right-1 sm:right-4 bottom-2/4 translate-y-2/4 z-10'>
+                                                <Button onClick={() => deleteRating('tv', id)} variant='contained' color='error'>Delete</Button>
                                             </div>
-                                        </Link>
-                                        <div className='absolute right-1 sm:right-4 bottom-2/4 translate-y-2/4 z-10'>
-                                            <Button onClick={() => deleteRating('tv', id)} variant='contained' color='error'>Delete</Button>
                                         </div>
-                                    </div>
-                                </Card>
-                            </div>
-                        )
-                    }) : <p className='text-red-600 text-center'>No TV-Shows</p>}
+                                    </Card>
+                                </div>
+                            )
+                        }) : <p className='text-red-600 text-center'>No TV-Shows</p>}
+                    </div>
                 </div>
-            </div>
             }
 
         </div>

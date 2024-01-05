@@ -89,7 +89,7 @@ const Person = () => {
 
                             return (
                                 <div className="my-2 sm:m-4" >
-                                    <Link to='/movie/id' state={{ id , media_type}}>
+                                    <Link to={`/movie/${id}`} state={{ id , media_type}}>
                                         <Card sx={{
                                             backgroundColor: 'transparent',
                                             borderRadius: 2,
