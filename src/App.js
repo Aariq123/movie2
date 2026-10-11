@@ -67,7 +67,7 @@ function App() {
       </div>
       <nav className="py-4 px-4 sm:py-8 absolute sm:px-12 w-screen flex z-20 justify-between">
         <p className="sm:text-2xl">
-          <Link to='/'>BALLS.COM</Link>
+          <Link to='/'>MOVIE-DB</Link>
         </p>
         <div className="md:hidden">
           <div className={mobileMenu ? 'hidden' : ''} onClick={() => setMobileMenu(true)}><MenuIcon sx={{ height: 33, width: 33 }}></MenuIcon></div>
@@ -98,7 +98,7 @@ function App() {
       <footer className="bg-black px-10 py-20 flex justify-evenly">
         <div className="flex flex-col">
           <p className="text-2xl m-2">
-            <Link to='/'>BALLS.COM</Link>
+            <Link to='/'>MOVIE-DB</Link>
           </p>
           <p className='m-2'>Movies</p>
           <p className='m-2'>TV-shows</p>
